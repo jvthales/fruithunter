@@ -23,6 +23,16 @@ export default function renderScreen(screen, game, requestAnimationFrame, curren
     context.fillRect(currentPlayer.x, currentPlayer.y, 1, 1)
   }
 
+  // score
+  let scoreText = ''
+  for (const playerId in game.state.players) {
+    const player = game.state.players[playerId]
+    let pType = player === currentPlayer ? '<p class="name">' : '<p>'
+    scoreText += `${pType}${playerId.substring(0,5)}: ${player.score}</p>`
+    document.getElementById('score-board').innerHTML = scoreText
+
+  }
+
   requestAnimationFrame(() => {
     renderScreen(screen, game, requestAnimationFrame, currentPlayerId)
   })

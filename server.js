@@ -13,20 +13,20 @@ const game = createGame()
 game.start()
 
 game.subscribe((command) => {
-  console.log(`> Emiting ${command.type}`)
+  // console.log(`> Emiting ${command.type}`)
   sockets.emit(command.type, command)
 })
 
 sockets.on('connection', (socket) => {
   const playerId = socket.id
-  console.log(`> Player connected on server with id ${playerId}`);
+  // console.log(`> Player connected on server with id ${playerId}`)
 
   game.addPlayer({ playerId })
 
   socket.emit('setup', game.state)
 
   socket.on('disconnect', () => {
-    console.log(`> Player disconnected: ${playerId}`)
+    // console.log(`> Player disconnected: ${playerId}`)
     game.removePlayer({ playerId })
   })
 
@@ -40,5 +40,5 @@ sockets.on('connection', (socket) => {
 })
 
 server.listen(3000, () => {
-  console.log(' > server listening on port: 3000')
+  // console.log(' > server listening on port: 3000')
 })
