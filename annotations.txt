@@ -1,0 +1,10 @@
+Patterns
+
+// factory Pattern
+// observer Pattern
+// command Pattern
+// event Emitter
+
+npx nodemon //server hotreload
+
+// anotar quadTree
