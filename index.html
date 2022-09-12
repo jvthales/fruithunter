@@ -29,6 +29,8 @@
       // observer Pattern
       // command Pattern
 
+      // anotar quadTree
+
       function createGame() {
 
         const state = {
@@ -72,39 +74,54 @@
   
         function movePlayer(command) {
 
-          console.log(`game.movePlayer() -> Moving ${command.playerId} with ${command.keyPressed}`)
+          // console.log(`game.movePlayer() -> Moving ${command.playerId} with ${command.keyPressed}`)
 
           const acceptedMoves = {
             ArrowUp(player) {
-              console.log('game.movePlayer().arrowUp -> Moving player up');
               player.y = Math.max(player.y - 1, 0)
               return
             },
             ArrowRight(player) {
-              console.log('game.movePlayer().arrowRight -> Moving player right');
               player.x = Math.min(player.x + 1, screen.width - 1)
               return
             },
             ArrowDown(player) {
-              console.log('game.movePlayer().arrowDown -> Moving player down');
               player.y = Math.min(player.y + 1, screen.height - 1)
               return
             },
             ArrowLeft(player) {
-              console.log('game.movePlayer().arrowLeft -> Moving player left');
               player.x = Math.max(player.x - 1, 0)
               return
             }
           }
 
-          const keyPressed = command.keyPressed
+          const {
+            keyPressed,
+            playerId
+          } = command
+
           const player = state.players[command.playerId]
           const moveFunction = acceptedMoves[keyPressed]
           
           if(player && moveFunction) {
             moveFunction(player)
+            checkForFruitCollision(playerId)
           }
 
+        }
+
+        function checkForFruitCollision(playerId) {
+          const player = state.players[playerId]
+
+          for (const fruitId in state.fruits) {
+            const fruit = state.fruits[fruitId]
+            console.log(`Checking ${playerId} and ${fruitId}`)
+
+            if (player.x === fruit.x && player.y === fruit.y) {
+              console.log(`collision between ${playerId} and ${fruitId}!!!`);
+              removeFruit({ fruitId })
+            }
+          }
         }
 
         return {
@@ -132,7 +149,7 @@
         }
 
         function notifyAll(command) {
-          console.log(`KeyboardListener -> Notifying ${state.observers.length} observers`)
+          // console.log(`KeyboardListener -> Notifying ${state.observers.length} observers`)
 
           for (const observerFunction of state.observers) {
             observerFunction(command)
