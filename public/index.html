@@ -19,6 +19,26 @@
         background-color: #b0b0b0;
       }
 
+      #game-container {
+        width: 400px;
+        height: 400px;
+        display: flex;
+      }
+
+      #login-box {
+        position: absolute;
+        top: auto;
+        left: auto;
+        width: 400px;
+        height: 400px;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        flex-direction: column;
+      }
+
       .mid-container {
         display: flex;
         justify-content: center;
@@ -39,8 +59,13 @@
   </head>
   <body>
     <div class="mid-container">
-      <h1></h1>
-      <canvas id="screen" width="10" height="10"></canvas>
+      <div id="game-container">
+        <div id="login-box">
+          <span>Digite seu nome:</span>
+          <input type="text" id="input-name">
+        </div>
+        <canvas id="screen" width="10" height="10"></canvas>
+      </div>
       <p id="score-board">Score: <span id="player-score">0</span></p>
     </div>
 

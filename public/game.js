@@ -14,7 +14,7 @@ export default function createGame() {
 
   const observers = []
 
-  function start() {
+  function startFruits() {
     setInterval(addFruit, fruitFrequency)
   }
 
@@ -37,19 +37,24 @@ export default function createGame() {
     const playerX = 'playerX' in command ? command.playerX : Math.floor(Math.random() * state.screen.width)
     const playerY = 'playerY' in command ? command.playerY : Math.floor(Math.random() * state.screen.height)
     const score = 'score' in command ? command.score : 0
+    const nickname = 'nickname' in command !== null ? command.nickname : command.playerId
 
     state.players[playerId] = {
       x: playerX,
       y: playerY,
-      score
+      score,
+      nickname
     }
+
+    console.log(state)
 
     notifyAll({
       type: 'add-player',
       playerId,
       playerX,
       playerY,
-      score
+      score,
+      nickname
     })
   }
 
@@ -161,6 +166,6 @@ export default function createGame() {
     state,
     setState,
     subscribe,
-    start
+    startFruits
   }
 }

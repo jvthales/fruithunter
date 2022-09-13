@@ -10,7 +10,7 @@ const sockets = new Server(server)
 app.use(express.static('public'))
 
 const game = createGame()
-game.start()
+game.startFruits()
 
 game.subscribe((command) => {
   // console.log(`> Emiting ${command.type}`)
@@ -40,5 +40,5 @@ sockets.on('connection', (socket) => {
 })
 
 server.listen(3000, () => {
-  // console.log(' > server listening on port: 3000')
+  console.log(' > server listening on port: 3000')
 })
